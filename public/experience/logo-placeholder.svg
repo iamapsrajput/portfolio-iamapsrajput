@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <rect width="48" height="48" rx="8" fill="#e2e8f0"/>
+  <path d="M24 14v20M14 24h20" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+  <text x="24" y="32" text-anchor="middle" font-size="9" font-weight="600" fill="#64748b" font-family="system-ui, sans-serif">LOGO</text>
+</svg>

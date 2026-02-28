@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import { Briefcase } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { cn } from "@/lib/utils";
 
@@ -53,13 +54,13 @@ export function ExperienceTimeline({
 
   return (
     <div className={cn("w-full font-sans md:px-10", className)} ref={containerRef}>
-      <div ref={ref} className="relative mx-auto max-w-7xl pb-20">
+      <div ref={ref} className="relative mx-auto max-w-7xl pb-8">
         {data.map((entry, idx) => (
           <div
             key={`${entry.company}-${idx}`}
-            className="flex justify-start pt-10 md:pt-40 md:gap-10"
+            className="flex justify-start pt-6 first:pt-4 md:pt-16 md:gap-8 first:md:pt-6"
           >
-            <div className="sticky top-40 z-40 flex max-w-xs flex-col self-start md:flex-row lg:max-w-sm md:w-full items-center">
+            <div className="sticky top-32 z-40 flex max-w-xs flex-col self-start md:flex-row lg:max-w-sm md:w-full items-center">
               <div className="absolute left-3 h-10 w-10 shrink-0 rounded-full border border-border/50 bg-card/80 backdrop-blur-sm flex items-center justify-center md:left-3">
                 <div className="h-4 w-4 rounded-full border border-border bg-muted" />
               </div>
@@ -73,7 +74,7 @@ export function ExperienceTimeline({
                 {entry.period}
               </h3>
               <Reveal delay={idx * 0.08}>
-                <div className="space-y-6">
+                <div className="space-y-4">
                   <div className="flex items-center gap-4">
                     {entry.companyLogo ? (
                       <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-md bg-muted p-1 shadow">
@@ -87,7 +88,9 @@ export function ExperienceTimeline({
                         />
                       </div>
                     ) : (
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-muted" aria-hidden />
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-border/50 bg-muted/80 text-muted-foreground" aria-hidden>
+                        <Briefcase className="h-6 w-6" />
+                      </div>
                     )}
                     <div>
                       <h4 className="text-lg font-semibold text-foreground">{entry.role}</h4>

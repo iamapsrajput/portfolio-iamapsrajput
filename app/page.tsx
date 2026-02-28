@@ -8,18 +8,21 @@ import {
   skills,
   personalProjects,
   experience,
+  education,
+  certifications,
   awards,
   skillImages,
   projectImages,
   experienceLogos,
   resumeUrl,
 } from "@/config/content";
-import { Download, Mail, MapPin, ExternalLink, Rocket, Linkedin } from "lucide-react";
+import { Download, Mail, MapPin, ExternalLink, Rocket, Linkedin, Trophy, Medal, Award, Star, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { GlowButton } from "@/components/ui/glow-button";
 import { TagChip } from "@/components/ui/tag-chip";
 import { SectionHeader } from "@/components/ui/section-header";
 import { ExperienceTimeline } from "@/components/ui/experience-timeline";
+import { EducationCertifications } from "@/components/ui/education-certifications";
 import { SkillCard } from "@/components/ui/skill-card";
 import { SkillsModal } from "@/components/ui/skills-modal";
 import { Button } from "@/components/ui/button";
@@ -60,7 +63,7 @@ export default function Home() {
             <Reveal>
               <h1 className="mb-6 text-5xl font-black tracking-tight sm:text-6xl md:text-7xl xl:text-8xl">
                 <span
-                  className="bg-clip-text text-transparent"
+                  className="hero-gradient-text bg-clip-text text-transparent"
                   style={{
                     backgroundImage:
                       "linear-gradient(to right, hsl(var(--foreground) / 0.88) 0%, hsl(var(--foreground)) 14%, hsl(var(--primary)) 55%, rgb(59 130 246) 100%)",
@@ -76,7 +79,7 @@ export default function Home() {
                 <div className="relative rounded-2xl border border-primary/20 bg-card/40 p-6 shadow-2xl backdrop-blur-sm">
                   <h2 className="mb-3 text-2xl font-bold sm:text-3xl lg:text-4xl">
                     <span
-                      className="bg-clip-text text-transparent"
+                      className="hero-gradient-text bg-clip-text text-transparent"
                       style={{
                         backgroundImage:
                           "linear-gradient(to right, hsl(var(--primary) / 0.88) 0%, hsl(var(--primary)) 14%, rgb(59 130 246) 50%, hsl(var(--primary)) 100%)",
@@ -135,7 +138,7 @@ export default function Home() {
         </section>
 
         {/* Skills */}
-        <section id="skills" className="relative border-b border-border/40 bg-muted/20 py-24">
+        <section id="skills" className="relative border-b border-border/40 bg-muted/20 py-20">
           <SectionBackground />
           <div className="container relative z-10 mx-auto px-4">
             <SectionHeader
@@ -166,7 +169,7 @@ export default function Home() {
 
         {/* Resume (optional) */}
         {resumeUrl && (
-          <section className="relative border-b border-border/40 bg-muted/20 py-24">
+          <section className="relative border-b border-border/40 bg-muted/20 py-20">
             <SectionBackground />
             <div className="container relative z-10 mx-auto px-4 text-center">
               <SectionHeader
@@ -186,7 +189,7 @@ export default function Home() {
         )}
 
         {/* Professional Experience — timeline format */}
-        <section id="experience" className="relative border-b border-border/40 bg-background py-24">
+        <section id="experience" className="relative border-b border-border/40 bg-background py-20">
           <SectionBackground />
           <div className="container relative z-10 mx-auto px-4">
             <SectionHeader
@@ -207,8 +210,11 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Education & Certifications */}
+        <EducationCertifications education={education} certifications={certifications} />
+
         {/* Projects */}
-        <section id="projects" className="relative border-b border-border/40 bg-muted/20 py-24">
+        <section id="projects" className="relative border-b border-border/40 bg-muted/20 py-20">
           <SectionBackground />
           <div className="container relative z-10 mx-auto px-4">
             <SectionHeader
@@ -303,34 +309,55 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Awards */}
+        {/* Awards & Recognition — pop-up style cards with icons */}
         {awards.length > 0 && (
-          <section className="border-b border-border/40 bg-background py-20">
-            <div className="container mx-auto px-4">
+          <section className="relative border-b border-border/40 bg-background py-20">
+            <SectionBackground />
+            <div className="container relative z-10 mx-auto px-4">
               <SectionHeader title="Awards & Recognition" />
               <motion.div
                 variants={staggerContainer}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-80px" }}
-                className="mx-auto max-w-2xl space-y-4"
+                className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 lg:gap-5"
               >
-                {awards.map((award, idx) => (
-                  <Reveal key={idx} delay={idx * 0.1}>
-                    <div className="rounded-xl border border-border/50 bg-card/60 p-6 backdrop-blur-sm">
-                      <h3 className="mb-2 font-semibold">{award.title}</h3>
-                      <p className="mb-2 text-sm text-muted-foreground">{award.company}</p>
-                      <p className="text-sm text-muted-foreground">{award.description}</p>
+                {awards.map((award, idx) => {
+                  const awardIconByTitle: Record<string, typeof Trophy> = {
+                    "Innovation Award": Trophy,
+                    "Star Award": Star,
+                    "QUADRANT Award": Medal,
+                    "PAT on the Back": Award,
+                  };
+                  const Icon = awardIconByTitle[award.title] ?? Sparkles;
+                  return (
+                  <Reveal key={idx} delay={idx * 0.08}>
+                    <div className="group flex gap-4 rounded-2xl border border-border/50 bg-card/70 p-5 shadow-sm backdrop-blur-sm transition-all hover:border-amber-500/25 hover:shadow-md dark:hover:border-amber-400/20">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-amber-500/25 bg-amber-500/10 text-amber-600 dark:border-amber-400/25 dark:bg-amber-400/10 dark:text-amber-400">
+                        <Icon className="h-6 w-6" aria-hidden />
+                      </div>
+                      <div className="min-w-0 flex-1 space-y-1">
+                        <h3 className="font-semibold leading-tight text-foreground">
+                          {award.title}
+                        </h3>
+                        <p className="text-sm font-medium text-muted-foreground">
+                          {award.company}
+                        </p>
+                        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                          {award.description}
+                        </p>
+                      </div>
                     </div>
                   </Reveal>
-                ))}
+                  );
+                })}
               </motion.div>
             </div>
           </section>
         )}
 
         {/* Connect */}
-        <section id="connect" className="relative border-b border-border/40 bg-muted/20 py-24">
+        <section id="connect" className="relative border-b border-border/40 bg-muted/20 py-20">
           <SectionBackground />
           <div className="container relative z-10 mx-auto px-4">
             <SectionHeader

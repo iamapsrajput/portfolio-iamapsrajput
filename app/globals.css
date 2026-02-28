@@ -162,6 +162,44 @@
     -webkit-text-fill-color: transparent;
   }
 
+  /* Headings: gradient in both modes; dark mode uses opaque start so beginning of text is visible */
+  .heading-title {
+    background: linear-gradient(
+      to right,
+      hsl(var(--foreground)) 0%,
+      hsl(var(--primary)) 50%,
+      rgb(59 130 246) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .dark .heading-title {
+    background: linear-gradient(
+      to right,
+      rgb(226 232 240) 0%,
+      rgb(203 213 225) 35%,
+      rgb(147 197 253) 70%,
+      rgb(96 165 250) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Hero name and tagline: dark mode gradient with visible start (no transparent beginning) */
+  .dark .hero-gradient-text {
+    background: linear-gradient(
+      to right,
+      rgb(241 245 249) 0%,
+      rgb(226 232 240) 40%,
+      rgb(147 197 253) 100%
+    ) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+
   /* Modern card */
   .modern-card {
     background: hsl(var(--card) / 0.8);

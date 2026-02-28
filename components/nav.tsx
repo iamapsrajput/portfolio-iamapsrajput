@@ -8,12 +8,13 @@ import { siteConfig } from "@/config/content";
 import { motion } from "framer-motion";
 import { MobileNav } from "@/components/ui/mobile-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { User, Code, Briefcase, FolderKanban, FileText, Mail } from "lucide-react";
+import { User, Code, Briefcase, GraduationCap, FolderKanban, FileText, Mail } from "lucide-react";
 
 const anchorLinks = [
   { href: "#about", label: "About", icon: User },
   { href: "#skills", label: "Skills", icon: Code },
   { href: "#experience", label: "Experience", icon: Briefcase },
+  { href: "#education", label: "Education", icon: GraduationCap },
   { href: "#projects", label: "Projects", icon: FolderKanban },
 ];
 
